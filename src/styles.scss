@@ -28,4 +28,5 @@ $fontFamilyBold: 'Estedad-Bold', serif;
 
 body {
   font-family: $fontFamily;
+  @apply bg-gray-50
 }
