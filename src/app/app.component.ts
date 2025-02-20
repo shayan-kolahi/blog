@@ -1,18 +1,12 @@
 import { Component } from '@angular/core';
 import { PrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import {HeaderComponent} from './components/header/header.component';
-import {MainComponent} from './components/main/main.component';
-import {SidebarComponent} from './components/sidebar/sidebar.component';
+import {RouterOutlet} from '@angular/router';
 
 
 @Component({
   selector: 'app-root',
-  imports: [
-    HeaderComponent,
-    MainComponent,
-    SidebarComponent
-  ],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
