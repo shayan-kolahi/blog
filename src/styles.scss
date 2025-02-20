@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@font-face {
+  font-family: 'Estedad-Bold';
+  src: url('../public/fonts/Estedad-Bold.ttf') format('ttf');
+  src: url('../public/fonts/Estedad-Bold.woff') format('woff');
+  src: url('../public/fonts/Estedad-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Estedad-Medium';
+  src: url('../public/fonts/Estedad-Medium.ttf') format('ttf');
+  src: url('../public/fonts/Estedad-Medium.woff') format('woff');
+  src: url('../public/fonts/Estedad-Medium.woff2') format('woff2');
+}
+
+$fontFamily: 'Estedad-Medium', serif;
+$fontFamilyBold: 'Estedad-Bold', serif;
+
+@layer tailwind-base, primeng, tailwind-utilities;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+body {
+  font-family: $fontFamily;
+}
