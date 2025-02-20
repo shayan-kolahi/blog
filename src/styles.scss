@@ -28,5 +28,32 @@ $fontFamilyBold: 'Estedad-Bold', serif;
 
 body {
   font-family: $fontFamily;
-  @apply bg-gray-50
+
+  &::-webkit-scrollbar-track
+  {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+  }
+
+  &::-webkit-scrollbar
+  {
+    width: 8px;
+    background-color: #F5F5F5;
+  }
+
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+  }
+
+  @apply bg-gray-100
+}
+
+.w-main {
+  width: calc(100% - 420px - 8px);
+}
+.w-sidebar {
+  width: 420px;
 }
