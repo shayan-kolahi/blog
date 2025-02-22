@@ -38,9 +38,17 @@ export class RegisterComponent {
 
   constructor(
     private validationService: ValidationService,
-    private messageService: MessageService) {}
+    private messageService: MessageService) {
+  }
 
   submit(): void {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Message Content'});
+    if (!this.validationService.isEmpty(this.registerData.name) ||
+      !this.validationService.isEmpty(this.registerData.email) ||
+      !this.validationService.isEmpty(this.registerData.password) ||
+      !this.validationService.isEmpty(this.registerData.password_confirmation)) {
+      this.messageService.add({severity: 'error', summary: 'خطا', detail: 'لطفا همه فیلد ها رو پر کنید'});
+      return;
+    }
+    console.log(111)
   }
 }
