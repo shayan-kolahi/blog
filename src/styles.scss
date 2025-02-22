@@ -57,3 +57,14 @@ body {
 .w-sidebar {
   width: 420px;
 }
+.p-inputwrapper-focus {
+  input{
+    &:focus{
+      @apply border-black;
+    }
+  }
+}
+eyeicon {
+  cursor: pointer;
+  user-select: none;
+}

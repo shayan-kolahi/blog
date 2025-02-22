@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { PrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import {RouterOutlet} from '@angular/router';
+import {Toast} from 'primeng/toast';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Toast],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
