@@ -9,17 +9,13 @@
       <div>
         <div class="flex flex-col gap-2 mb-4 relative pb-6">
           <label>ایمیل</label>
-          <input pInputText type="email" class="focus:border-black" />
-<!--          class="ng-invalid ng-dirty"-->
-<!--          <small class="text-red-500 absolute bottom-0">Enter your username to reset your password.</small>-->
+          <input pInputText type="email" class="focus:border-black" [(ngModel)]="logInData.email" />
         </div>
         <div class="flex flex-col gap-2 mb-4 relative pb-6">
           <label>رمز</label>
-          <p-password fluid="fluid" toggleMask="true" feedback="false" />
-          <!--          class="ng-invalid ng-dirty"-->
-<!--          <small class="text-red-500 absolute bottom-0">Enter your username to reset your password.</small>-->
+          <p-password fluid="fluid" toggleMask="true" feedback="false" promptLabel="رمز خود را وارد نمایید" [(ngModel)]="logInData.password" />
         </div>
-        <button class="w-full" pButton severity="info">ورود</button>
+        <button class="w-full" pButton severity="info" (click)="submit()">ورود</button>
       </div>
       <div class="mt-2 flex w-full">
         <button routerLink="/register" class="w-full" pButton severity="info" outlined >ثبت نام</button>

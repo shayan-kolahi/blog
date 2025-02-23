@@ -41,6 +41,11 @@ export class RegisterComponent {
     private messageService: MessageService) {
   }
 
+
+  isStrongPassword(password: string): boolean {
+    const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return strongRegex.test(password);
+  }
   submit(): void {
     if (!this.validationService.isEmpty(this.registerData.name) ||
       !this.validationService.isEmpty(this.registerData.email) ||
@@ -49,6 +54,18 @@ export class RegisterComponent {
       this.messageService.add({severity: 'error', summary: 'خطا', detail: 'لطفا همه فیلد ها رو پر کنید'});
       return;
     }
-    console.log(111)
+    if (!this.validationService.isEmail(this.registerData.email)){
+      this.messageService.add({severity: 'error', summary: 'خطا', detail: 'لطفا فیلد ایمیل را درست وارد کنید'});
+      return;
+    }
+    if (!this.isStrongPassword(this.registerData.password)) {
+      this.messageService.add({severity: 'error', summary: 'خطا', detail: 'رمز عبور ضعیفه، لطفاً یه قوی‌تر انتخاب کن.'});
+      return;
+    }
+    if (this.registerData.password !== this.registerData.password_confirmation){
+      this.messageService.add({severity: 'error', summary: 'خطا', detail: 'رمز و تکرار رمز برابر نیست'});
+      return;
+    }
+    console.log(this.registerData)
   }
 }
