@@ -1,12 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {ButtonDirective} from 'primeng/button';
 import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {ValidationService} from '../../../services/validation.service';
 import {NgClass} from '@angular/common';
 import {MessageService} from 'primeng/api';
+import {ENVIRONMENT} from '../../../../environment/environment.token';
+import {ApiService} from '../../../services/api.service';
 
 interface RegisterDataInterface {
   name: string;
@@ -38,8 +40,9 @@ export class RegisterComponent {
 
   constructor(
     private validationService: ValidationService,
-    private messageService: MessageService) {
-  }
+    private messageService: MessageService,
+    private api: ApiService,
+    private router: Router) {}
 
 
   isStrongPassword(password: string): boolean {
@@ -66,6 +69,13 @@ export class RegisterComponent {
       this.messageService.add({severity: 'error', summary: 'خطا', detail: 'رمز و تکرار رمز برابر نیست'});
       return;
     }
-    console.log(this.registerData)
+
+    this.api.register(this.registerData).subscribe((data: any): void => {
+      console.log(data);
+      if (data.success) {
+        this.router.navigate(['/logIn'], {})
+      }
+    })
+
   }
 }
