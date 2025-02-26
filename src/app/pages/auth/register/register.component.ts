@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {ButtonDirective} from 'primeng/button';
 import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
@@ -7,7 +7,6 @@ import {FormsModule} from '@angular/forms';
 import {ValidationService} from '../../../services/validation.service';
 import {NgClass} from '@angular/common';
 import {MessageService} from 'primeng/api';
-import {ENVIRONMENT} from '../../../../environment/environment.token';
 import {ApiService} from '../../../services/api.service';
 
 interface RegisterDataInterface {
@@ -69,11 +68,15 @@ export class RegisterComponent {
       this.messageService.add({severity: 'error', summary: 'خطا', detail: 'رمز و تکرار رمز برابر نیست'});
       return;
     }
-
-    this.api.register(this.registerData).subscribe((data: any): void => {
-      console.log(data);
-      if (data.success) {
-        this.router.navigate(['/logIn'], {})
+    this.api.register(this.registerData).subscribe({
+      next: (data: any): void => {
+        if (data.success) {
+          this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'ثبت نام شما با موفقیت انجام شد'});
+          this.router.navigate(['/logIn'], {})
+        }
+      },
+      error: (err: any): void => {
+        this.messageService.add({severity: 'error', summary: 'خطا', detail: err.error.message});
       }
     })
 

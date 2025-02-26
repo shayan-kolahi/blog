@@ -11,4 +11,7 @@ export class ApiService {
   register(registerData: any): Observable<any> {
     return this.http.post(this.env.apiUrl + 'api/register', registerData)
   }
+  logIn(logInData: any): Observable<any> {
+    return this.http.post(this.env.apiUrl + 'api/login', logInData)
+  }
 }

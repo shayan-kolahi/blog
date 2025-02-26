@@ -3,9 +3,10 @@ import {FormsModule} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {ButtonDirective} from 'primeng/button';
 import {Password} from 'primeng/password';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {ValidationService} from '../../../services/validation.service';
 import {MessageService} from 'primeng/api';
+import {ApiService} from '../../../services/api.service';
 
 interface LogInDataInterface {
   email: string;
@@ -32,7 +33,9 @@ export class LogInComponent {
 
   constructor(
     private validationService: ValidationService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private api: ApiService,
+    private router: Router) {
   }
 
 
@@ -49,6 +52,17 @@ export class LogInComponent {
       this.messageService.add({severity: 'error', summary: 'خطا', detail: 'لطفا فیلد ایمیل را درست وارد کنید'});
       return;
     }
-    console.log(this.logInData)
+    this.api.logIn(this.logInData).subscribe({
+      next: (data: any): void => {
+        if (data.success) {
+          localStorage.setItem('token', data.data.token)
+          this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'ثبت نام شما با موفقیت انجام شد'});
+          this.router.navigate(['/'], {})
+        }
+      },
+      error: (err: any): void => {
+        this.messageService.add({severity: 'error', summary: 'خطا', detail: err.error.message});
+      }
+    })
   }
 }
