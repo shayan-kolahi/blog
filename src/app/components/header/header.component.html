@@ -1,9 +1,9 @@
 <header class="bg-white border-b sticky top-0 shadow">
   <div class="container h-14 flex items-center justify-between">
-    <button class="w-8 h-8"><svg-icon class="w-8 h-8" src="/icons/logo.svg"></svg-icon></button>
+    <button routerLink="/" class="w-8 h-8"><svg-icon class="w-8 h-8" src="/icons/logo.svg"></svg-icon></button>
     <ul class="flex gap-2 items-center">
       <li *ngIf="auth.isAuthenticated()">
-        <button class="px-3 gap-2 h-8 border hover:border-gray-700 transition flex justify-center items-center rounded-md m-0 p-0 bg-white">
+        <button routerLink="/newPost" class="px-3 gap-2 h-8 border hover:border-gray-700 transition flex justify-center items-center rounded-md m-0 p-0 bg-white">
           <i class="pi pi-plus text-surface-700"></i>
           <span class="text-surface-700 text-base">پست</span>
         </button>

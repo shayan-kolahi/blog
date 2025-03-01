@@ -4,12 +4,17 @@ import {LogInComponent} from './pages/auth/log-in/log-in.component';
 import {RegisterComponent} from './pages/auth/register/register.component';
 import {NoAuthGuard} from './guard/noAuth.guard';
 import {AuthGuard} from './guard/auth.guard';
+import {NewPostComponent} from './pages/new-post/new-post.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'newPost',
+    component: NewPostComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'logIn',
