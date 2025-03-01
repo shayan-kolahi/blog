@@ -1,2 +1,16 @@
 <app-header/>
-<p>new-post works!</p>
+<section>
+  <div class="container flex gap-2 mt-2 mb-2">
+    <div class="w-2/4 rounded-lg border p-2 bg-white flex flex-col items-center justify-center">
+      <input type="text" placeholder="عنوان ..." class="w-full text-xl focus:outline-none h-8" [(ngModel)]="title">
+      <div class="flex justify-between w-full my-4">
+        <p-multiselect class="w-72" [options]="cities" [(ngModel)]="selectedCities" optionLabel="name" placeholder="Select Cities" [maxSelectedLabels]="3"></p-multiselect>
+        <p-multiselect class="w-72" [options]="cities" [(ngModel)]="selectedCities" optionLabel="name" placeholder="Select Cities" [maxSelectedLabels]="3"></p-multiselect>
+      </div>
+      <textarea placeholder="توضیحات ..." class="w-full text-base border rounded-lg p-2 h-40 resize-none focus:outline-none" [(ngModel)]="description"></textarea>
+    </div>
+    <div class="w-2/4 rounded-lg border p-2 bg-white flex flex-col items-center justify-center">
+      <p-message severity="info">پیش نمایش در دست ساخت است</p-message>
+    </div>
+  </div>
+</section>
