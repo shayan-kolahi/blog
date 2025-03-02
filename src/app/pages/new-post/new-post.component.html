@@ -4,13 +4,41 @@
     <div class="w-2/4 rounded-lg border p-2 bg-white flex flex-col items-center justify-center">
       <input type="text" placeholder="عنوان ..." class="w-full text-xl focus:outline-none h-8" [(ngModel)]="title">
       <div class="flex justify-between w-full my-4">
-        <p-multiselect class="w-72" [options]="cities" [(ngModel)]="selectedCities" optionLabel="name" placeholder="Select Cities" [maxSelectedLabels]="3"></p-multiselect>
-        <p-multiselect class="w-72" [options]="cities" [(ngModel)]="selectedCities" optionLabel="name" placeholder="Select Cities" [maxSelectedLabels]="3"></p-multiselect>
+        <p-multiselect class="w-72" [options]="getAllCategory" emptyMessage="چیزی پیدا نکردم :)" [(ngModel)]="selectedCategory" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
+          <ng-template let-country #item>
+            <div class="flex items-center gap-2">
+              <div>{{ country?.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template #footer>
+            <div class="p-3 flex justify-between w-full">
+              <button class="w-full" pButton severity="secondary" size="small" (click)="addNew('category')">اضافه کردن یک مورد جدید</button>
+            </div>
+          </ng-template>
+        </p-multiselect>
+        <p-multiselect class="w-72" [options]="getAllTag" emptyMessage="چیزی پیدا نکردم :)" [(ngModel)]="selectedTag" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
+          <ng-template let-country #item>
+            <div class="flex items-center gap-2">
+              <div>{{ country?.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template #footer>
+            <div class="p-3 flex justify-between w-full">
+              <button class="w-full" pButton severity="secondary" size="small" (click)="addNew('tag')">اضافه کردن یک مورد جدید</button>
+            </div>
+          </ng-template>
+        </p-multiselect>
       </div>
       <textarea placeholder="توضیحات ..." class="w-full text-base border rounded-lg p-2 h-40 resize-none focus:outline-none" [(ngModel)]="description"></textarea>
+      <button class="w-full mt-5" pButton severity="info" size="large" (click)="submit()">ثبت</button>
     </div>
     <div class="w-2/4 rounded-lg border p-2 bg-white flex flex-col items-center justify-center">
       <p-message severity="info">پیش نمایش در دست ساخت است</p-message>
     </div>
   </div>
 </section>
+
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+  <input class="w-full mb-4" type="text" pInputText [(ngModel)]="AddNewValue" />
+  <button class="w-full" pButton severity="info" size="large" (click)="submitAddNew()">اضافه کردن یک مورد جدید</button>
+</p-dialog>

@@ -8,13 +8,7 @@ import {ValidationService} from '../../../services/validation.service';
 import {NgClass} from '@angular/common';
 import {MessageService} from 'primeng/api';
 import {ApiService} from '../../../services/api.service';
-
-interface RegisterDataInterface {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string
-}
+import {RegisterDataInterface} from '../../../interface/global';
 
 @Component({
   selector: 'app-register',

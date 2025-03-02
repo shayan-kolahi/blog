@@ -5,11 +5,12 @@ import { routes } from './app.routes';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideAngularSvgIcon} from 'angular-svg-icon';
 import {MessageService} from 'primeng/api';
 import {environment} from '../environment/environment.config';
 import {ENVIRONMENT} from '../environment/environment.token';
+import {authInterceptor} from './interceptors/auth.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideAngularSvgIcon(),
     providePrimeNG({
       theme: {

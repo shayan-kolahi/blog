@@ -7,11 +7,8 @@ import {Router, RouterLink} from '@angular/router';
 import {ValidationService} from '../../../services/validation.service';
 import {MessageService} from 'primeng/api';
 import {ApiService} from '../../../services/api.service';
+import {LogInDataInterface} from '../../../interface/global';
 
-interface LogInDataInterface {
-  email: string;
-  password: string;
-}
 
 @Component({
   selector: 'app-log-in',
@@ -38,11 +35,6 @@ export class LogInComponent {
     private router: Router) {
   }
 
-
-  isStrongPassword(password: string): boolean {
-    const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-    return strongRegex.test(password);
-  }
   submit(): void {
     if (!this.validationService.isEmpty(this.logInData.email) || !this.validationService.isEmpty(this.logInData.password)) {
       this.messageService.add({severity: 'error', summary: 'خطا', detail: 'لطفا همه فیلد ها رو پر کنید'});
@@ -56,7 +48,7 @@ export class LogInComponent {
       next: (data: any): void => {
         if (data.success) {
           localStorage.setItem('token', data.data.token)
-          this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'ثبت نام شما با موفقیت انجام شد'});
+          this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'ورود شما با موفقیت انجام شد'});
           this.router.navigate(['/'], {})
         }
       },
