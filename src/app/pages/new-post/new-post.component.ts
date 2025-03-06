@@ -9,6 +9,7 @@ import {ApiService} from '../../services/api.service';
 import {InputText} from 'primeng/inputtext';
 import {MessageService} from 'primeng/api';
 import {CategoryInterface, TagInterface} from '../../interface/global';
+import {ValidationService} from '../../services/validation.service';
 
 @Component({
   selector: 'app-new-post',
@@ -40,6 +41,7 @@ export class NewPostComponent implements OnInit {
 
   constructor(
     private api: ApiService,
+    private validationService: ValidationService,
     private messageService: MessageService,
   ) {}
 
@@ -64,6 +66,7 @@ export class NewPostComponent implements OnInit {
           this.api.getAllCategory().subscribe((data: any): void => {
             this.getAllCategory = data.data;
             this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'یک دسته بندی جدید اضافه شد'});
+            this.AddNewValue = '';
             this.visible = false;
           })
         },
@@ -77,6 +80,7 @@ export class NewPostComponent implements OnInit {
           this.api.getAllTag().subscribe((data: any): void => {
             this.getAllTag = data.data;
             this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'یک تگ جدید اضافه شد'});
+            this.AddNewValue = '';
             this.visible = false;
           })
         },
@@ -88,6 +92,10 @@ export class NewPostComponent implements OnInit {
   }
 
   submit(): void {
+    if (!this.validationService.isEmpty(this.title) || !this.validationService.isEmpty(this.description) || !this.validationService.isEmptyArr(this.selectedCategory) || !this.validationService.isEmptyArr(this.selectedTag)) {
+      this.messageService.add({severity: 'error', summary: 'خطا', detail: 'لطفا همه فیلد ها رو پر کنید'});
+      return;
+    }
     this.api.addPost({
       title: this.title,
       description: this.description,

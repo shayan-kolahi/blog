@@ -44,6 +44,8 @@ export class LogInComponent {
       this.messageService.add({severity: 'error', summary: 'خطا', detail: 'لطفا فیلد ایمیل را درست وارد کنید'});
       return;
     }
+    this.logInData.email = this.logInData.email.trim();
+    this.logInData.password = this.logInData.password.trim();
     this.api.logIn(this.logInData).subscribe({
       next: (data: any): void => {
         if (data.success) {

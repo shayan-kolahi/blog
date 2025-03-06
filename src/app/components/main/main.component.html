@@ -1,14 +1,7 @@
 <section class="w-full flex flex-col gap-2">
+  @for (item of getPost?.data; track item.id) {
     <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
-    <div class="rounded-lg border p-20 bg-white"></div>
+  } @empty {
+    <div class="rounded-lg border p-20 bg-white">empty :)</div>
+  }
 </section>

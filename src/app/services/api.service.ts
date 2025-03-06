@@ -30,4 +30,7 @@ export class ApiService {
   addPost(data: any): Observable<any> {
     return this.http.post(this.env.apiUrl + 'api/post', data)
   }
+  getPost(): Observable<any> {
+    return this.http.get(this.env.apiUrl + 'api/post')
+  }
 }

@@ -62,6 +62,10 @@ export class RegisterComponent {
       this.messageService.add({severity: 'error', summary: 'خطا', detail: 'رمز و تکرار رمز برابر نیست'});
       return;
     }
+    this.registerData.name = this.registerData.name.trim();
+    this.registerData.email = this.registerData.email.trim();
+    this.registerData.password = this.registerData.password.trim();
+    this.registerData.password_confirmation = this.registerData.password_confirmation.trim();
     this.api.register(this.registerData).subscribe({
       next: (data: any): void => {
         if (data.success) {
