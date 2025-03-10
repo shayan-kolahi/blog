@@ -8,6 +8,7 @@ import {ValidationService} from '../../../services/validation.service';
 import {MessageService} from 'primeng/api';
 import {ApiService} from '../../../services/api.service';
 import {LogInDataInterface} from '../../../interface/global';
+import {GlobalDataService} from '../../../services/globalData.service';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class LogInComponent {
     private validationService: ValidationService,
     private messageService: MessageService,
     private api: ApiService,
+    public globalData: GlobalDataService,
     private router: Router) {
   }
 
@@ -51,6 +53,7 @@ export class LogInComponent {
         if (data.success) {
           localStorage.setItem('token', data.data.token)
           this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'ورود شما با موفقیت انجام شد'});
+          this.globalData.getUserDataFn();
           this.router.navigate(['/'], {})
         }
       },

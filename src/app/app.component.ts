@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { PrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import {RouterOutlet} from '@angular/router';
 import {Toast} from 'primeng/toast';
+import {GlobalDataService} from './services/globalData.service';
 
 
 @Component({
@@ -10,8 +11,8 @@ import {Toast} from 'primeng/toast';
   imports: [RouterOutlet, Toast],
   templateUrl: './app.component.html'
 })
-export class AppComponent {
-  constructor(private primeng: PrimeNG) {
+export class AppComponent implements OnInit {
+  constructor(private primeng: PrimeNG, public globalData: GlobalDataService) {
     this.primeng.theme.set({
       preset: Aura,
       options: {
@@ -21,5 +22,8 @@ export class AppComponent {
         }
       }
     })
+  }
+  ngOnInit(): void {
+    this.globalData.getUserDataFn();
   }
 }

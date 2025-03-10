@@ -33,4 +33,7 @@ export class ApiService {
   getPost(): Observable<any> {
     return this.http.get(this.env.apiUrl + 'api/post')
   }
+  getUserData(): Observable<any> {
+    return this.http.get(this.env.apiUrl + 'api/userInfo')
+  }
 }

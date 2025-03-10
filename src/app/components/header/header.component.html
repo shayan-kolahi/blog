@@ -9,10 +9,13 @@
         </button>
       </li>
       <li *ngIf="auth.isAuthenticated()">
-        <button class="px-3 gap-2 h-8 border hover:border-gray-700 transition flex justify-center items-center rounded-md m-0 p-0 bg-white">
+        <button (click)="menu.toggle($event)" class="px-3 gap-2 h-8 border hover:border-gray-700 transition flex justify-center items-center rounded-md m-0 p-0 bg-white">
           <i class="pi pi-user text-surface-700"></i>
-          <span class="text-surface-700 text-base">خوش اومدی خوشگله :)</span>
+          <span class="text-surface-700 text-base">{{ this.globalData.userData().name }}</span>
+          <i class="pi pi-angle-down text-surface-700"></i>
+
         </button>
+        <p-menu #menu [model]="items" [popup]="true" />
       </li>
       <li *ngIf="!auth.isAuthenticated()">
         <button routerLink="/logIn" class="w-8 h-8 border hover:border-gray-700 transition flex justify-center items-center rounded-md m-0 p-0 bg-white">
