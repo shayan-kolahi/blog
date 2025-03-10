@@ -24,8 +24,8 @@ import {LogInDataInterface} from '../../../interface/global';
 })
 export class LogInComponent {
   logInData: LogInDataInterface = {
-    email: '',
-    password: '',
+    email: 'shayankolahi30@gmail.com',
+    password: 'a12345678@A',
   };
 
   constructor(

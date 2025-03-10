@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {HeaderComponent} from '../../components/header/header.component';
 import {FormsModule} from '@angular/forms';
 import {MessageModule} from 'primeng/message';
@@ -10,6 +10,9 @@ import {InputText} from 'primeng/inputtext';
 import {MessageService} from 'primeng/api';
 import {CategoryInterface, TagInterface} from '../../interface/global';
 import {ValidationService} from '../../services/validation.service';
+import {NgIf} from '@angular/common';
+import {ProgressSpinner} from 'primeng/progressspinner';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-post',
@@ -20,7 +23,9 @@ import {ValidationService} from '../../services/validation.service';
     MessageModule,
     ButtonDirective,
     Dialog,
-    InputText
+    InputText,
+    NgIf,
+    ProgressSpinner
   ],
   templateUrl: './new-post.component.html',
   styleUrl: './new-post.component.scss'
@@ -43,6 +48,7 @@ export class NewPostComponent implements OnInit {
     private api: ApiService,
     private validationService: ValidationService,
     private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -96,18 +102,67 @@ export class NewPostComponent implements OnInit {
       this.messageService.add({severity: 'error', summary: 'خطا', detail: 'لطفا همه فیلد ها رو پر کنید'});
       return;
     }
+    let selectedCategoryIds: number[] = this.selectedCategory.map(item => item.id);
+    let selectedTagIds: number[] = this.selectedTag.map(item => item.id);
     this.api.addPost({
       title: this.title,
       description: this.description,
-      categories: this.selectedCategory,
-      tags: this.selectedTag
+      categories: selectedCategoryIds,
+      tags: selectedTagIds
     }).subscribe({
       next: data => {
         console.log(data);
+        this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'پست شما با موفقیت ساخته و آپلود شد'});
+        this.router.navigate(['/'], {})
+
       },
       error: err => {
         this.messageService.add({severity: 'error', summary: 'خطا', detail: err.message});
       }
     })
   }
+
+  // uploadImage
+  imageUrl: string | ArrayBuffer | null = null;
+  isLoading = false; // برای نمایش لودینگ
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  triggerFileInput() {
+    if (!this.imageUrl) {
+      this.fileInput.nativeElement.click();
+    }
+  }
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.uploadImage(file);
+    }
+  }
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    const file = event.dataTransfer?.files?.[0];
+    if (file) {
+      this.uploadImage(file);
+    }
+  }
+  uploadImage(file: File) {
+    this.isLoading = true; // نمایش لودینگ
+    const reader = new FileReader();
+    reader.onload = () => {
+      setTimeout(() => {
+        this.imageUrl = reader.result;
+        this.isLoading = false; // مخفی کردن لودینگ
+      }, 1000); // شبیه‌سازی تأخیر در لود شدن عکس
+    };
+    reader.readAsDataURL(file);
+  }
+  removeImage(event: Event) {
+    event.stopPropagation(); // جلوگیری از کلیک روی باکس آپلود
+    this.imageUrl = null;
+    this.fileInput.nativeElement.value = ''; // پاک کردن مقدار input
+  }
+  // uploadImage
+
 }

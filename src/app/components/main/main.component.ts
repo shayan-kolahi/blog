@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {MessageService} from 'primeng/api';
 
@@ -13,11 +13,11 @@ export class MainComponent implements OnInit {
     private api: ApiService,
     private messageService: MessageService
   ) {}
-  getPost: any;
+  postData: WritableSignal<any> = signal([]);
   ngOnInit(): void {
     this.api.getPost().subscribe({
       next: data => {
-        this.getPost = data;
+        this.postData.set(data);
       },
       error: err => {
         this.messageService.add({severity: 'error', summary: 'خطا', detail: err.message});

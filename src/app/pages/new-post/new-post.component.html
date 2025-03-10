@@ -2,7 +2,28 @@
 <section>
   <div class="container flex gap-2 mt-2 mb-2">
     <div class="w-2/4 rounded-lg border p-2 bg-white flex flex-col items-center justify-center">
-      <input type="text" placeholder="عنوان ..." class="w-full text-xl focus:outline-none h-8" [(ngModel)]="title">
+
+
+      <div class="w-full h-52 border-2 border-dashed border-gray-700 rounded-lg p-3 flex justify-center items-center mb-4 cursor-pointer bg-slate-50 text-gray-700 hover:bg-blue-100 hover:border-blue-700 hover:text-blue-700 transition" (click)="triggerFileInput()" [class.has-image]="imageUrl" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+        <input type="file" #fileInput (change)="onFileSelected($event)" hidden accept="image/*">
+
+        <div *ngIf="isLoading">
+          <p-progress-spinner ariaLabel="loading" />
+        </div>
+
+        <div *ngIf="!imageUrl && !isLoading"  class="placeholder">
+          <p>برای آپلود کلیک کنید یا عکس را بکشید اینجا</p>
+        </div>
+
+        <div *ngIf="imageUrl" class="w-full h-full rounded-lg overflow-hidden relative flex flex-col items-center justify-center">
+          <img class="object-cover w-full h-full" [src]="imageUrl" alt="Uploaded Image">
+          <button class="absolute bottom-3" pButton severity="danger" (click)="removeImage($event)">حذف</button>
+        </div>
+      </div>
+
+
+
+      <input type="text" placeholder="عنوان ..." class="w-full text-xl focus:outline-none h-14 border p-2 rounded-lg" [(ngModel)]="title">
       <div class="flex justify-between w-full my-4">
         <p-multiselect class="w-72" [options]="getAllCategory" emptyMessage="چیزی پیدا نکردم :)" [(ngModel)]="selectedCategory" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
           <ng-template let-country #item>
