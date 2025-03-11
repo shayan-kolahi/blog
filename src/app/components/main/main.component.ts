@@ -2,9 +2,20 @@ import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {MessageService} from 'primeng/api';
 
+interface PostDataInterface {
+  id: number,
+  user_id: number,
+  title: string,
+  description: string,
+  created_at: string,
+  like_count: number,
+  comment_count: number,
+  tags: string[],
+  categories: string[]
+}
+
 @Component({
   selector: 'app-main',
-  imports: [],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
@@ -13,11 +24,12 @@ export class MainComponent implements OnInit {
     private api: ApiService,
     private messageService: MessageService
   ) {}
-  postData: WritableSignal<any> = signal([]);
+  postData: WritableSignal<PostDataInterface[]> = signal([]);
   ngOnInit(): void {
     this.api.getPost().subscribe({
       next: data => {
-        this.postData.set(data);
+        this.postData.set(data.data);
+        console.log(this.postData())
       },
       error: err => {
         this.messageService.add({severity: 'error', summary: 'خطا', detail: err.message});

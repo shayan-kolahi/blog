@@ -13,6 +13,17 @@ interface UserDataInterface {
   updated_at: string
 }
 
+interface getAllCategoryDataInterface {
+  id: number,
+  name: string,
+  parent_id: number
+}
+
+interface getAllTagDataInterface {
+  id: number,
+  name: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,20 +38,40 @@ export class GlobalDataService {
     created_at: '',
     updated_at: ''
   });
+  getAllCategoryData: WritableSignal<getAllCategoryDataInterface[]> = signal([]);
+  getAllTagData: WritableSignal<getAllTagDataInterface[]> = signal([]);
 
-  constructor(public authService: AuthService, private api: ApiService) {}
+  constructor(private api: ApiService) {}
 
   getUserDataFn() {
-    if (this.authService.isAuthenticated()){
-      this.api.getUserData().subscribe({
-        next: data => {
-          console.log(222, data);
-          this.userData.set(data);
-        },
-        error: error => {
-          console.error(222, error);
-        }
-      })
-    }
+    this.api.getUserData().subscribe({
+      next: data => {
+        this.userData.set(data);
+      },
+      error: error => {
+        console.error(222, error);
+      }
+    })
+  }
+
+  getAllCategoryDataFn() {
+    this.api.getAllCategory().subscribe({
+      next: data => {
+        this.getAllCategoryData.set(data.data);
+      },
+      error: error => {
+        console.error(222, error);
+      }
+    })
+  }
+  getAllTagDataFn() {
+    this.api.getAllTag().subscribe({
+      next: data => {
+        this.getAllTagData.set(data.data);
+      },
+      error: error => {
+        console.error(222, error);
+      }
+    })
   }
 }

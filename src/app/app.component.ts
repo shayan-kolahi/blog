@@ -25,5 +25,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.globalData.getUserDataFn();
+    this.globalData.getAllCategoryDataFn();
+    this.globalData.getAllTagDataFn();
   }
 }

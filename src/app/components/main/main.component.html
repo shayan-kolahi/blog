@@ -1,5 +1,5 @@
 <section class="w-full flex flex-col gap-2">
-  @for (item of postData().data; track item.id) {
+  @for (item of postData(); track item.id) {
     <div class="rounded-lg border p-20 bg-white"></div>
   } @empty {
     <div class="rounded-lg border p-20 bg-white">empty :)</div>

@@ -13,6 +13,7 @@ import {ValidationService} from '../../services/validation.service';
 import {NgIf} from '@angular/common';
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {Router} from '@angular/router';
+import {GlobalDataService} from '../../services/globalData.service';
 
 @Component({
   selector: 'app-new-post',
@@ -40,24 +41,15 @@ export class NewPostComponent implements OnInit {
   AddNewValue: string = '';
   type: string = '';
 
-
-  getAllCategory: any[] = [];
-  getAllTag: any[] = [];
-
   constructor(
     private api: ApiService,
+    public globalData: GlobalDataService,
     private validationService: ValidationService,
     private messageService: MessageService,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.api.getAllCategory().subscribe((data: any): void => {
-      this.getAllCategory = data.data
-    })
-    this.api.getAllTag().subscribe((data: any): void => {
-      this.getAllTag = data.data
-    })
   }
 
   addNew(type: string): void {
@@ -69,12 +61,10 @@ export class NewPostComponent implements OnInit {
     if (this.type === 'category') {
       this.api.addNewCategory(this.AddNewValue).subscribe({
         next: data => {
-          this.api.getAllCategory().subscribe((data: any): void => {
-            this.getAllCategory = data.data;
-            this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'یک دسته بندی جدید اضافه شد'});
-            this.AddNewValue = '';
-            this.visible = false;
-          })
+          this.globalData.getAllCategoryDataFn();
+          this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'یک دسته بندی جدید اضافه شد'});
+          this.AddNewValue = '';
+          this.visible = false;
         },
         error: err => {
           this.messageService.add({severity: 'error', summary: 'خطا', detail: err.message});
@@ -83,12 +73,10 @@ export class NewPostComponent implements OnInit {
     } else {
       this.api.addNewTag(this.AddNewValue).subscribe({
         next: data => {
-          this.api.getAllTag().subscribe((data: any): void => {
-            this.getAllTag = data.data;
-            this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'یک تگ جدید اضافه شد'});
-            this.AddNewValue = '';
-            this.visible = false;
-          })
+          this.globalData.getAllTagDataFn();
+          this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'یک تگ جدید اضافه شد'});
+          this.AddNewValue = '';
+          this.visible = false;
         },
         error: err => {
           this.messageService.add({severity: 'error', summary: 'خطا', detail: err.message});

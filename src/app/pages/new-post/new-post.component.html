@@ -25,7 +25,7 @@
 
       <input type="text" placeholder="عنوان ..." class="w-full text-xl focus:outline-none h-14 border p-2 rounded-lg" [(ngModel)]="title">
       <div class="flex justify-between w-full my-4">
-        <p-multiselect class="w-72" [options]="getAllCategory" emptyMessage="چیزی پیدا نکردم :)" [(ngModel)]="selectedCategory" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
+        <p-multiselect class="w-72" [options]="globalData.getAllCategoryData()" emptyMessage="چیزی پیدا نکردم :)" [(ngModel)]="selectedCategory" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
           <ng-template let-country #item>
             <div class="flex items-center gap-2">
               <div>{{ country?.name }}</div>
@@ -37,7 +37,7 @@
             </div>
           </ng-template>
         </p-multiselect>
-        <p-multiselect class="w-72" [options]="getAllTag" emptyMessage="چیزی پیدا نکردم :)" [(ngModel)]="selectedTag" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
+        <p-multiselect class="w-72" [options]="globalData.getAllTagData()" emptyMessage="چیزی پیدا نکردم :)" [(ngModel)]="selectedTag" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
           <ng-template let-country #item>
             <div class="flex items-center gap-2">
               <div>{{ country?.name }}</div>
