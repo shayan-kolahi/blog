@@ -8,7 +8,7 @@ import {ValidationService} from '../../../services/validation.service';
 import {NgClass} from '@angular/common';
 import {MessageService} from 'primeng/api';
 import {ApiService} from '../../../services/api.service';
-import {RegisterDataInterface} from '../../../interface/global';
+import {RegisterDataInterface} from '../../../interface/model.interface';
 
 @Component({
   selector: 'app-register',
@@ -20,8 +20,7 @@ import {RegisterDataInterface} from '../../../interface/global';
     FormsModule,
     NgClass
   ],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent {
   registerData: RegisterDataInterface = {

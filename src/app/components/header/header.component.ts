@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {SvgIconComponent} from 'angular-svg-icon';
 import {RouterLink} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
@@ -10,8 +10,7 @@ import {GlobalDataService} from '../../services/globalData.service';
 @Component({
   selector: 'app-header',
   imports: [SvgIconComponent, RouterLink, NgIf, Menu],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent {
   items: MenuItem[] = [
@@ -33,6 +32,7 @@ export class HeaderComponent {
       }
     }
   ];
+
   constructor(public auth: AuthService, public globalData: GlobalDataService, public authService: AuthService) {
   }
 }

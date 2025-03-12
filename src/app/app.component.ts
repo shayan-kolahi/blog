@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import { PrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
+import {PrimeNG} from 'primeng/config';
 import {RouterOutlet} from '@angular/router';
 import {Toast} from 'primeng/toast';
 import {GlobalDataService} from './services/globalData.service';
-
+import Aura from '@primeng/themes/aura';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Toast],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  imports: [RouterOutlet, Toast]
 })
 export class AppComponent implements OnInit {
   constructor(private primeng: PrimeNG, public globalData: GlobalDataService) {
@@ -23,6 +22,7 @@ export class AppComponent implements OnInit {
       }
     })
   }
+
   ngOnInit(): void {
     this.globalData.getUserDataFn();
     this.globalData.getAllCategoryDataFn();

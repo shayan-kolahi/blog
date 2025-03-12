@@ -9,24 +9,27 @@
       <div>
         <div class="flex flex-col gap-2 mb-4 relative pb-6">
           <label>نام</label>
-          <input pInputText type="text" class="focus:border-black" [ngClass]="" [(ngModel)]="registerData.name" />
+          <input pInputText type="text" class="focus:border-black" [ngClass]="" [(ngModel)]="registerData.name"/>
         </div>
         <div class="flex flex-col gap-2 mb-4 relative pb-6">
           <label>ایمیل</label>
-          <input pInputText type="email" dir="ltr" class="focus:border-black text-left" [(ngModel)]="registerData.email" />
+          <input pInputText type="email" dir="ltr" class="focus:border-black text-left"
+                 [(ngModel)]="registerData.email"/>
         </div>
         <div class="flex flex-col gap-2 mb-4 relative pb-6">
           <label>رمز</label>
-          <p-password fluid="fluid" toggleMask="true" promptLabel="رمز خود را وارد نمایید" weakLabel="ضعیف" mediumLabel="متوسط" strongLabel="قوی" [(ngModel)]="registerData.password" />
+          <p-password fluid="fluid" toggleMask="true" promptLabel="رمز خود را وارد نمایید" weakLabel="ضعیف"
+                      mediumLabel="متوسط" strongLabel="قوی" [(ngModel)]="registerData.password"/>
         </div>
         <div class="flex flex-col gap-2 mb-4 relative pb-6">
           <label>تکرار رمز</label>
-          <p-password fluid="fluid" toggleMask="true" feedback="false" [(ngModel)]="registerData.password_confirmation" />
+          <p-password fluid="fluid" toggleMask="true" feedback="false"
+                      [(ngModel)]="registerData.password_confirmation"/>
         </div>
         <button class="w-full" pButton severity="info" (click)="submit()">ثبت نام</button>
       </div>
       <div class="mt-2 flex w-full">
-        <button routerLink="/logIn" class="w-full" pButton severity="info" outlined >ورود</button>
+        <button routerLink="/logIn" class="w-full" pButton severity="info" outlined>ورود</button>
       </div>
     </div>
   </div>

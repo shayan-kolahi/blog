@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {HomeComponent} from './pages/home/home.component';
 import {LogInComponent} from './pages/auth/log-in/log-in.component';
 import {RegisterComponent} from './pages/auth/register/register.component';
@@ -25,5 +25,9 @@ export const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate: [NoAuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: '',
   }
 ];

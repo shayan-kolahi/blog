@@ -2,34 +2,22 @@ import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {MessageService} from 'primeng/api';
 import {GlobalDataService} from '../../services/globalData.service';
-import {CategoryInterface, TagInterface} from '../../interface/global';
-
-interface PostDataInterface {
-  id: number,
-  user_id: number,
-  title: string,
-  description: string,
-  created_at: string,
-  like_count: number,
-  comment_count: number,
-  tags: string[],
-  categories: string[],
-  categoriesArr?: (CategoryInterface | undefined)[],
-  tagsArr?: (TagInterface | undefined)[],
-}
+import {PostDataInterface} from '../../interface/model.interface';
 
 @Component({
   selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+  templateUrl: './main.component.html'
 })
 export class MainComponent implements OnInit {
   constructor(
     private api: ApiService,
     private messageService: MessageService,
     private globalData: GlobalDataService
-  ) {}
+  ) {
+  }
+
   postData: WritableSignal<PostDataInterface[]> = signal([]);
+
   ngOnInit(): void {
     this.api.getPost().subscribe({
       next: data => {
@@ -59,9 +47,10 @@ export class MainComponent implements OnInit {
     const dayText = diffDays === 0 ? "امروز" : `${diffDays} روز پیش`;
     return `${jalaliDate} ( ${dayText} )`;
   }
+
   convertToJalali(isoDate: string): string {
     const date = new Date(isoDate);
-    const formatter = new Intl.DateTimeFormat('fa-IR-u-nu-latn', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    const formatter = new Intl.DateTimeFormat('fa-IR-u-nu-latn', {year: 'numeric', month: '2-digit', day: '2-digit'});
     return formatter.format(date);
   }
 }

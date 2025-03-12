@@ -10,9 +10,6 @@ import {SidebarComponent} from "../../components/sidebar/sidebar.component";
         MainComponent,
         SidebarComponent
     ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: './home.component.html'
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

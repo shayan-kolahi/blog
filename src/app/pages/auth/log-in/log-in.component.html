@@ -9,16 +9,17 @@
       <div>
         <div class="flex flex-col gap-2 mb-4 relative pb-6">
           <label>ایمیل</label>
-          <input pInputText type="email" dir="ltr" class="focus:border-black text-left" [(ngModel)]="logInData.email" />
+          <input pInputText type="email" dir="ltr" class="focus:border-black text-left" [(ngModel)]="logInData.email"/>
         </div>
         <div class="flex flex-col gap-2 mb-4 relative pb-6">
           <label>رمز</label>
-          <p-password fluid="fluid" toggleMask="true" feedback="false" promptLabel="رمز خود را وارد نمایید" [(ngModel)]="logInData.password" />
+          <p-password fluid="fluid" toggleMask="true" feedback="false" promptLabel="رمز خود را وارد نمایید"
+                      [(ngModel)]="logInData.password"/>
         </div>
         <button class="w-full" pButton severity="info" (click)="submit()">ورود</button>
       </div>
       <div class="mt-2 flex w-full">
-        <button routerLink="/register" class="w-full" pButton severity="info" outlined >ثبت نام</button>
+        <button routerLink="/register" class="w-full" pButton severity="info" outlined>ثبت نام</button>
       </div>
     </div>
   </div>

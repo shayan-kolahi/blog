@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {HeaderComponent} from '../../components/header/header.component';
 import {FormsModule} from '@angular/forms';
 import {MessageModule} from 'primeng/message';
@@ -8,7 +8,7 @@ import {Dialog} from 'primeng/dialog';
 import {ApiService} from '../../services/api.service';
 import {InputText} from 'primeng/inputtext';
 import {MessageService} from 'primeng/api';
-import {CategoryInterface, TagInterface} from '../../interface/global';
+import {CategoryInterface, TagInterface} from '../../interface/model.interface';
 import {ValidationService} from '../../services/validation.service';
 import {NgIf} from '@angular/common';
 import {ProgressSpinner} from 'primeng/progressspinner';
@@ -28,10 +28,9 @@ import {GlobalDataService} from '../../services/globalData.service';
     NgIf,
     ProgressSpinner
   ],
-  templateUrl: './new-post.component.html',
-  styleUrl: './new-post.component.scss'
+  templateUrl: './new-post.component.html'
 })
-export class NewPostComponent implements OnInit {
+export class NewPostComponent {
   title: string = '';
   description: string = '';
   selectedCategory: CategoryInterface[] = [];
@@ -47,9 +46,7 @@ export class NewPostComponent implements OnInit {
     private validationService: ValidationService,
     private messageService: MessageService,
     private router: Router
-  ) {}
-
-  ngOnInit() {
+  ) {
   }
 
   addNew(type: string): void {
@@ -114,20 +111,24 @@ export class NewPostComponent implements OnInit {
   imageUrl: string | ArrayBuffer | null = null;
   isLoading = false; // برای نمایش لودینگ
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
   triggerFileInput() {
     if (!this.imageUrl) {
       this.fileInput.nativeElement.click();
     }
   }
+
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
       this.uploadImage(file);
     }
   }
+
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
+
   onDrop(event: DragEvent) {
     event.preventDefault();
     const file = event.dataTransfer?.files?.[0];
@@ -135,6 +136,7 @@ export class NewPostComponent implements OnInit {
       this.uploadImage(file);
     }
   }
+
   uploadImage(file: File) {
     this.isLoading = true; // نمایش لودینگ
     const reader = new FileReader();
@@ -146,11 +148,13 @@ export class NewPostComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+
   removeImage(event: Event) {
     event.stopPropagation(); // جلوگیری از کلیک روی باکس آپلود
     this.imageUrl = null;
     this.fileInput.nativeElement.value = ''; // پاک کردن مقدار input
   }
+
   // uploadImage
 
 }

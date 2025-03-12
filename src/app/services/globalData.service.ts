@@ -1,17 +1,6 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
 import {ApiService} from './api.service';
-import {CategoryInterface, TagInterface} from '../interface/global';
-
-interface UserDataInterface {
-  id: number,
-  type: string,
-  name: string,
-  email: string,
-  email_verified_at: any,
-  profile_image_url: any,
-  created_at: string,
-  updated_at: string
-}
+import {CategoryInterface, TagInterface, UserDataInterface} from '../interface/model.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +19,10 @@ export class GlobalDataService {
   getAllCategoryData: WritableSignal<CategoryInterface[]> = signal([]);
   getAllTagData: WritableSignal<TagInterface[]> = signal([]);
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService) {
+  }
 
-  getUserDataFn() {
+  getUserDataFn(): void {
     this.api.getUserData().subscribe({
       next: data => {
         this.userData.set(data);
@@ -43,7 +33,7 @@ export class GlobalDataService {
     })
   }
 
-  getAllCategoryDataFn() {
+  getAllCategoryDataFn(): void {
     this.api.getAllCategory().subscribe({
       next: data => {
         this.getAllCategoryData.set(data.data);
@@ -53,7 +43,8 @@ export class GlobalDataService {
       }
     })
   }
-  getAllTagDataFn() {
+
+  getAllTagDataFn(): void {
     this.api.getAllTag().subscribe({
       next: data => {
         this.getAllTagData.set(data.data);

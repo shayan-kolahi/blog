@@ -7,8 +7,9 @@ import {Router, RouterLink} from '@angular/router';
 import {ValidationService} from '../../../services/validation.service';
 import {MessageService} from 'primeng/api';
 import {ApiService} from '../../../services/api.service';
-import {LogInDataInterface} from '../../../interface/global';
+import {LogInDataInterface} from '../../../interface/model.interface';
 import {GlobalDataService} from '../../../services/globalData.service';
+import {AuthService} from '../../../services/auth.service';
 
 
 @Component({
@@ -20,8 +21,7 @@ import {GlobalDataService} from '../../../services/globalData.service';
     Password,
     RouterLink
   ],
-  templateUrl: './log-in.component.html',
-  styleUrl: './log-in.component.scss'
+  templateUrl: './log-in.component.html'
 })
 export class LogInComponent {
   logInData: LogInDataInterface = {
@@ -33,6 +33,7 @@ export class LogInComponent {
     private validationService: ValidationService,
     private messageService: MessageService,
     private api: ApiService,
+    private authService: AuthService,
     public globalData: GlobalDataService,
     private router: Router) {
   }
@@ -51,7 +52,7 @@ export class LogInComponent {
     this.api.logIn(this.logInData).subscribe({
       next: (data: any): void => {
         if (data.success) {
-          localStorage.setItem('token', data.data.token)
+          this.authService.login(data.data.token)
           this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'ورود شما با موفقیت انجام شد'});
           this.globalData.getUserDataFn();
           this.router.navigate(['/'], {})

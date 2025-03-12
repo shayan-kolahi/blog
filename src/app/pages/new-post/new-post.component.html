@@ -2,30 +2,31 @@
 <section>
   <div class="container flex gap-2 mt-2 mb-2">
     <div class="w-2/4 rounded-lg border p-2 bg-white flex flex-col items-center justify-center">
-
-
-      <div class="w-full h-52 border-2 border-dashed border-gray-700 rounded-lg p-3 flex justify-center items-center mb-4 cursor-pointer bg-slate-50 text-gray-700 hover:bg-blue-100 hover:border-blue-700 hover:text-blue-700 transition" (click)="triggerFileInput()" [class.has-image]="imageUrl" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+      <div
+        class="w-full h-52 border-2 border-dashed border-gray-700 rounded-lg p-3 flex justify-center items-center mb-4 cursor-pointer bg-slate-50 text-gray-700 hover:bg-blue-100 hover:border-blue-700 hover:text-blue-700 transition"
+        (click)="triggerFileInput()" [class.has-image]="imageUrl" (dragover)="onDragOver($event)"
+        (drop)="onDrop($event)">
         <input type="file" #fileInput (change)="onFileSelected($event)" hidden accept="image/*">
 
         <div *ngIf="isLoading">
-          <p-progress-spinner ariaLabel="loading" />
+          <p-progress-spinner ariaLabel="loading"/>
         </div>
 
-        <div *ngIf="!imageUrl && !isLoading"  class="placeholder">
+        <div *ngIf="!imageUrl && !isLoading" class="placeholder">
           <p>برای آپلود کلیک کنید یا عکس را بکشید اینجا</p>
         </div>
 
-        <div *ngIf="imageUrl" class="w-full h-full rounded-lg overflow-hidden relative flex flex-col items-center justify-center">
+        <div *ngIf="imageUrl"
+             class="w-full h-full rounded-lg overflow-hidden relative flex flex-col items-center justify-center">
           <img class="object-cover w-full h-full" [src]="imageUrl" alt="Uploaded Image">
           <button class="absolute bottom-3" pButton severity="danger" (click)="removeImage($event)">حذف</button>
         </div>
       </div>
-
-
-
-      <input type="text" placeholder="عنوان ..." class="w-full text-xl focus:outline-none h-14 border p-2 rounded-lg" [(ngModel)]="title">
+      <input type="text" placeholder="عنوان ..." class="w-full text-xl focus:outline-none h-14 border p-2 rounded-lg"
+             [(ngModel)]="title">
       <div class="flex justify-between w-full my-4">
-        <p-multiselect class="w-72" [options]="globalData.getAllCategoryData()" emptyMessage="چیزی پیدا نکردم :)" [(ngModel)]="selectedCategory" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
+        <p-multiselect class="w-72" [options]="globalData.getAllCategoryData()" emptyMessage="چیزی پیدا نکردم :)"
+                       [(ngModel)]="selectedCategory" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
           <ng-template let-country #item>
             <div class="flex items-center gap-2">
               <div>{{ country?.name }}</div>
@@ -33,11 +34,14 @@
           </ng-template>
           <ng-template #footer>
             <div class="p-3 flex justify-between w-full">
-              <button class="w-full" pButton severity="secondary" size="small" (click)="addNew('category')">اضافه کردن یک مورد جدید</button>
+              <button class="w-full" pButton severity="secondary" size="small" (click)="addNew('category')">اضافه کردن
+                یک مورد جدید
+              </button>
             </div>
           </ng-template>
         </p-multiselect>
-        <p-multiselect class="w-72" [options]="globalData.getAllTagData()" emptyMessage="چیزی پیدا نکردم :)" [(ngModel)]="selectedTag" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
+        <p-multiselect class="w-72" [options]="globalData.getAllTagData()" emptyMessage="چیزی پیدا نکردم :)"
+                       [(ngModel)]="selectedTag" placeholder="انتخاب دسته بندی" optionLabel="name" display="chip">
           <ng-template let-country #item>
             <div class="flex items-center gap-2">
               <div>{{ country?.name }}</div>
@@ -45,12 +49,16 @@
           </ng-template>
           <ng-template #footer>
             <div class="p-3 flex justify-between w-full">
-              <button class="w-full" pButton severity="secondary" size="small" (click)="addNew('tag')">اضافه کردن یک مورد جدید</button>
+              <button class="w-full" pButton severity="secondary" size="small" (click)="addNew('tag')">اضافه کردن یک
+                مورد جدید
+              </button>
             </div>
           </ng-template>
         </p-multiselect>
       </div>
-      <textarea placeholder="توضیحات ..." class="w-full text-base border rounded-lg p-2 h-40 resize-none focus:outline-none" [(ngModel)]="description"></textarea>
+      <textarea placeholder="توضیحات ..."
+                class="w-full text-base border rounded-lg p-2 h-40 resize-none focus:outline-none"
+                [(ngModel)]="description"></textarea>
       <button class="w-full mt-5" pButton severity="info" size="large" (click)="submit()">ثبت</button>
     </div>
     <div class="w-2/4 rounded-lg border p-2 bg-white flex flex-col items-center justify-center">
@@ -60,6 +68,6 @@
 </section>
 
 <p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-  <input class="w-full mb-4" type="text" pInputText [(ngModel)]="AddNewValue" />
+  <input class="w-full mb-4" type="text" pInputText [(ngModel)]="AddNewValue"/>
   <button class="w-full" pButton severity="info" size="large" (click)="submitAddNew()">اضافه کردن یک مورد جدید</button>
 </p-dialog>

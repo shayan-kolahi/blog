@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ENVIRONMENT} from '../../environment/environment.token';
 import {Observable} from 'rxjs';
-import {LogInDataInterface, RegisterDataInterface} from '../interface/global';
+import {LogInDataInterface, RegisterDataInterface} from '../interface/model.interface';
 
 @Injectable({
   providedIn: 'root'
