@@ -96,10 +96,8 @@ export class NewPostComponent {
       tags: selectedTagIds
     }).subscribe({
       next: data => {
-        console.log(data);
         this.messageService.add({severity: 'success', summary: 'تبریک', detail: 'پست شما با موفقیت ساخته و آپلود شد'});
         this.router.navigate(['/'], {})
-
       },
       error: err => {
         this.messageService.add({severity: 'error', summary: 'خطا', detail: err.message});

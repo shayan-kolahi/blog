@@ -38,7 +38,6 @@ export class MainComponent implements OnInit {
       item.created_at = this.timeAgo(item.created_at);
     });
     this.postData.set(postData);
-    console.log(this.postData());
   }
 
   timeAgo(createdAt: string): string {
