@@ -10,10 +10,15 @@ module.exports = {
         md: '728px',
         lg: '984px',
         xl: '1240px',
-        '2xl': '1496px',
+        '2xl': '1300px',
       },
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        one: 'Estedad-Medium',
+        two: 'Estedad-Bold'
+      }
+    },
   },
   plugins: [require('tailwindcss-primeui')],
 }
