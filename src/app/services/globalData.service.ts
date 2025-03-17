@@ -1,6 +1,7 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
 import {ApiService} from './api.service';
 import {CategoryInterface, TagInterface, UserDataInterface} from '../interface/model.interface';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class GlobalDataService {
   getAllCategoryData: WritableSignal<CategoryInterface[]> = signal([]);
   getAllTagData: WritableSignal<TagInterface[]> = signal([]);
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private auth: AuthService) {
   }
 
   getUserDataFn(): void {
@@ -28,6 +29,7 @@ export class GlobalDataService {
         this.userData.set(data);
       },
       error: error => {
+        this.auth.logout();
         console.error(222, error);
       }
     })

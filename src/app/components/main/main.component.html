@@ -1,7 +1,7 @@
 <section class="w-full flex flex-col gap-2">
   @for (item of postData(); track item.id) {
-    <div class="rounded-lg border p-6 bg-white hover:border-black transition-all cursor-pointer">
-      <div class="flex items-center">
+    <div class="rounded-lg border p-6 bg-white hover:border-black transition-all cursor-pointer" (click)="pushToPostPage(item.id)">
+      <div class="flex items-center" (click)="$event.stopPropagation()">
         <img class="w-12 h-12 rounded-lg ml-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqafzhnwwYzuOTjTlaYMeQ7hxQLy_Wq8dnQg&s" alt="Avatar of Jonathan Reinink">
         <div class="text-sm rounded-lg transition-all group group">
           <p class="text-gray-900 group-hover:text-blue-700 font-two mb-1">اینجا اسم کاربر باید بیاد و با کلیک با تو اکانتش</p>
@@ -12,7 +12,7 @@
         <h2 class="font-two text-xl mb-2 text-gray-700 hover:text-blue-700">{{ item.title }}</h2>
         <div class="pt-4">
           @for (tag of item.tagsArr; track tag?.id) {
-            <span class="inline-block bg-gray-100 hover:bg-gray-200 transition-all rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ml-2 mb-2"># {{ tag?.name }}</span>
+            <span (click)="$event.stopPropagation()" class="inline-block bg-gray-100 hover:bg-gray-200 transition-all rounded-full px-3 py-1 text-sm font-semibold text-gray-700 ml-2 mb-2"># {{ tag?.name }}</span>
           }
         </div>
       </div>

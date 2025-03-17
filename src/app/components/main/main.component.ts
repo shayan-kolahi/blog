@@ -3,6 +3,7 @@ import {ApiService} from '../../services/api.service';
 import {MessageService} from 'primeng/api';
 import {GlobalDataService} from '../../services/globalData.service';
 import {PostDataInterface} from '../../interface/model.interface';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -12,8 +13,8 @@ export class MainComponent implements OnInit {
   constructor(
     private api: ApiService,
     private messageService: MessageService,
-    private globalData: GlobalDataService
-  ) {
+    private globalData: GlobalDataService,
+    private router: Router) {
   }
 
   postData: WritableSignal<PostDataInterface[]> = signal([]);
@@ -51,5 +52,9 @@ export class MainComponent implements OnInit {
     const date = new Date(isoDate);
     const formatter = new Intl.DateTimeFormat('fa-IR-u-nu-latn', {year: 'numeric', month: '2-digit', day: '2-digit'});
     return formatter.format(date);
+  }
+
+  pushToPostPage(id: number): void {
+    this.router.navigate(['/post', id]);
   }
 }
